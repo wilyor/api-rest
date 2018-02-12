@@ -1,0 +1,23 @@
+<script type="text/javascript">
+
+  let productList = document.createElement('ul')
+
+  var myHeaders = new Headers();
+  var textBearer = localStorage.token;
+  myHeaders.append('authorization',textBearer );
+  fetch('api/product',{
+    method: 'GET',
+    headers : myHeaders
+  })
+  .then(res=>res.json())
+  .then(function(json){
+    json.map(product=>{
+      let text = document.createTextNode(product.name)
+      let elem = document.createElement('li')
+      elem.appendChild(text)
+      productList.appendChild(elem)
+    })
+
+    document.body.appendChild(productList)
+  })
+</script>
